@@ -54,5 +54,10 @@ jobs:
     - name: Deploy to AKS using ArgoCD # ArgoCD를 사용하여 AKS에 배포합니다.
       run: |
         argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+        argocd app create my-nginx-app \
+          --repo https://github.com/seungho-Cloud/my-nginx-app.git \
+          --path . \
+          --dest-server https://kubernetes.default.svc \
+          --dest-namespace default
         argocd app sync my-nginx-app
         argocd app wait my-nginx-app --health
