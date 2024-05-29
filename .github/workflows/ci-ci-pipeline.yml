@@ -41,9 +41,7 @@ jobs:
     steps:
     - name: Checkout code # 코드를 체크아웃합니다.
       uses: actions/checkout@v2
-    - name: Debug KUBE_CONFIG secret
-      run: |
-        echo "KUBE_CONFIG secret: ${{ secrets.KUBE_CONFIG }}"
+
     - name: Configure kubectl # kubectl을 설정합니다.
       uses: azure/setup-kubectl@v1
       with:
@@ -51,7 +49,8 @@ jobs:
     
     - name: Set up Kubeconfig # Kubernetes 설정 파일을 설정합니다.
       run: |
-        echo "${{ secrets.KUBE_CONFIG }}"  > ${HOME}/.kube/config
+        mkdir -p $HOME/.kube # 디렉토리 생성
+        echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config # Kubeconfig
     
     - name: Deploy to AKS using ArgoCD # ArgoCD를 사용하여 AKS에 배포합니다.
       run: |
