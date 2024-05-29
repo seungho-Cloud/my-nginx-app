@@ -47,15 +47,6 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Install Argo CD CLI
-      run: |
-        curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-        sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-        argocd version --client
-
-    - name: Install Expect
-      run:  sudo apt-get update && sudo apt-get install -y expect
-
     - name: Set up Kubeconfig # Kubernetes 설정 파일을 설정합니다.
       run: |
         mkdir -p $HOME/.kube # 디렉토리 생성
