@@ -59,7 +59,7 @@ jobs:
         echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config # Kubeconfig
     
      - name: Deploy to AKS using ArgoCD
-      run: |
+       run: |
         echo "Logging in to Argo CD"
         expect <<EOF
         spawn argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure --grpc-web
