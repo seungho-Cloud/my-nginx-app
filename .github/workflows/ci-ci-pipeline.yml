@@ -42,7 +42,7 @@ jobs:
     - name: Checkout code # 코드를 체크아웃합니다.
       uses: actions/checkout@v2
     - name: Debug KUBE_CONFIG secret
-       run: |
+      run: |
         echo "KUBE_CONFIG secret: ${{ secrets.KUBE_CONFIG }}"
     - name: Configure kubectl # kubectl을 설정합니다.
       uses: azure/setup-kubectl@v1
