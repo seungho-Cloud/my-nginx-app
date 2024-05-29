@@ -57,7 +57,11 @@ jobs:
       run: |
         mkdir -p $HOME/.kube # 디렉토리 생성
         echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config # Kubeconfig
-    
+        
+    - name: Ping Argo CD Server
+      run: |
+        ping -c 4 ${{ secrets.ARGOCD_SERVER }}
+
     - name: Deploy to AKS using ArgoCD # ArgoCD를 사용하여 AKS에 배포합니다.
       run: |
         argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure --grpc-web
